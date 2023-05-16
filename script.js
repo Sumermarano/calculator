@@ -1,22 +1,3 @@
-const display = document.querySelector(".display");
-const buttons = Array.from(document.querySelectorAll(".button"));
-
-let operandA = 0;
-let operandB = 0;
-let operator;
-let displayNum = 0;
-display.textContent = +displayNum;
-
-buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-        if (+button.textContent || +button.textContent === 0) {
-            displayNum += button.textContent;
-            display.textContent = +displayNum;
-        } else if (button.textContent == '+') {
-            operandA
-        }
-    })
-})
 
 
 function operate(x, operator, y) {
@@ -25,10 +6,12 @@ function operate(x, operator, y) {
             return add(x, y);
         case '-':
             return subtract(x, y);
-        case '*':
+        case 'x':
             return multiply(x, y);
         case '/':
             return divise(x, y);
+        case '%':
+            return remainder(x, y);
     };
 }
 
@@ -47,3 +30,7 @@ function multiply(x, y) {
 function divise(x, y) {
     return x / y;
 };
+
+function remainder(x, y) {
+    return x % y;
+}

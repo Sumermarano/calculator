@@ -3,6 +3,22 @@ let operandB = 0;
 let operator;
 
 
+        if (+button.textContent || +button.textContent === 0) {
+            displayNum += button.textContent;
+            display.textContent = +displayNum;
+        } else if (button.textContent == '=') {
+            operandB = +displayNum;
+            console.log(operandA);
+            console.log(operandB);
+            displayNum = 0;
+            operandA = operate(operandA, operator, operandB);
+            display.textContent = operandA;
+        } 
+        else {
+            if (operandA == null) operandA = +displayNum;
+            displayNum = 0;
+            operator = button.textContent;
+        }
 
 
 function operate(x, operator, y) {

@@ -22,6 +22,11 @@
     margin-bottom: 10px;
 }
 
+.top,
+.bottom {
+    height: 29px;
+}
+
 .buttons {
     width: 230px;
     display: flex;

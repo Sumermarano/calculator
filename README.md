@@ -1,3 +1,2 @@
 # Calculator
-Building a calculator that supports addition, subtraction, multiplication, and division.
-For now, maybe more later.
+It's a Calculator, but probably not that good.

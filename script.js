@@ -56,8 +56,12 @@ buttons.forEach((button) => {
             
         } else if (button.getAttribute("data-type") == "sign") {
 
-            enteredValue = -enteredValue;
-            bottomDisplay.textContent = enteredValue;
+            if (!enteredValue == "") {
+
+                enteredValue = -enteredValue;
+                bottomDisplay.textContent = enteredValue;
+
+            }
         
         } else if (button.getAttribute("data-type") == "dot") {
             

@@ -14,11 +14,16 @@ buttons.forEach((button) => {
     button.addEventListener("click", () => {
         if (button.getAttribute("data-type") == "number") {
             // The enteredValue is a string, and will be displayed as a number.
-            enteredValue += button.textContent;
-            bottomDisplay.textContent = +enteredValue;
+            if (enteredValue == "" && button.textContent == "0") {
+
+            } else {
+                enteredValue += button.textContent;
+                bottomDisplay.textContent = enteredValue;
+            }
 
         } else if (button.getAttribute("data-type") == "operation") {
 
+            isEquals = false;
             operator = button.textContent;
             operandA = +enteredValue;
             topDisplay.textContent = +enteredValue + " " + operator;
@@ -27,11 +32,16 @@ buttons.forEach((button) => {
 
         } else if (button.getAttribute("data-type") == "equals") {
 
-            operandB = +enteredValue;
-            topDisplay.textContent += " " + operandB;
-            enteredValue = operate(operandA, operator, operandB);
-            isFloat = false;
-            bottomDisplay.textContent = enteredValue;
+            if (!isEquals) {
+
+                isEquals = true;
+                operandB = +enteredValue;
+                topDisplay.textContent += " " + operandB;
+                enteredValue = operate(operandA, operator, operandB);
+                isFloat = false;
+                bottomDisplay.textContent = enteredValue;
+
+            }
 
         } else if (button.getAttribute("data-type") == "reset") {
 
@@ -40,6 +50,7 @@ buttons.forEach((button) => {
             operandB = null;
             operator = null;
             isFloat = false;
+            isEquals = false;
             topDisplay.textContent = "";
             bottomDisplay.textContent = "0";
             
@@ -52,7 +63,7 @@ buttons.forEach((button) => {
             
             if (!isFloat) {
                 isFloat = true;
-                enteredValue = enteredValue + '.';
+                enteredValue = '0' + enteredValue + '.';
                 bottomDisplay.textContent = enteredValue;
             }
             
@@ -61,12 +72,34 @@ buttons.forEach((button) => {
                 enteredValue = enteredValue.slice(0, -1);
                 bottomDisplay.textContent = enteredValue;
         }
-    })
+    });
 
-    button.addEventListener("hover", () => {
+    button.addEventListener("mouseenter", () => {
 
-    })
-})
+        if (button.getAttribute("data-type") == "number" || button.getAttribute("data-type") == "dot") {
+
+            button.style.cssText = "transform: scale(1.1); background-color: #3498DB;";
+
+        } else if (button.getAttribute("data-type") == "operation" || button.getAttribute("data-type") == "sign") {
+
+            button.style.cssText = "transform: scale(1.1); background-color: #F1C40F;";
+
+        } else if (button.getAttribute("data-type") == "equals") {
+
+            button.style.cssText = "transform: scale(1.1); background-color: #2ECC71;";
+
+        } else if (button.getAttribute("data-type") == "reset" || button.getAttribute("data-type") == "delete") {
+
+            button.style.cssText = "transform: scale(1.1); background-color: #E74C3C;";
+
+        }
+
+    });
+    
+    button.addEventListener("mouseleave", () => {
+        button.style.cssText = "transform: scale(1); background-color: #9BA4B5;";
+    });
+});
 
 
 
@@ -93,7 +126,7 @@ function operate(x, operator, y) {
         case '%':
             return remainder(x, y);
     };
-}
+};
 
 function add(x, y) {
     return x + y;
@@ -114,4 +147,4 @@ function divise(x, y) {
 
 function remainder(x, y) {
     return x % y;
-}
+};

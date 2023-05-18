@@ -2,7 +2,8 @@ let enteredValue = "";
 let operandA = null;
 let operandB = null;
 let operator = null;
-let float = false;
+let isFloat = false;
+let isEquals = false;
 
 const buttons = Array.from(document.querySelectorAll(".button"));
 const topDisplay = document.querySelector(".top");
@@ -21,7 +22,7 @@ buttons.forEach((button) => {
             operator = button.textContent;
             operandA = +enteredValue;
             topDisplay.textContent = +enteredValue + " " + operator;
-            float = false;
+            isFloat = false;
             enteredValue = "";
 
         } else if (button.getAttribute("data-type") == "equals") {
@@ -29,8 +30,7 @@ buttons.forEach((button) => {
             operandB = +enteredValue;
             topDisplay.textContent += " " + operandB;
             enteredValue = operate(operandA, operator, operandB);
-            float = false;
-            console.log(enteredValue);
+            isFloat = false;
             bottomDisplay.textContent = enteredValue;
 
         } else if (button.getAttribute("data-type") == "reset") {
@@ -39,7 +39,7 @@ buttons.forEach((button) => {
             operandA = null;
             operandB = null;
             operator = null;
-            float = false;
+            isFloat = false;
             topDisplay.textContent = "";
             bottomDisplay.textContent = "0";
             
@@ -50,16 +50,21 @@ buttons.forEach((button) => {
         
         } else if (button.getAttribute("data-type") == "dot") {
             
-            if (!float) {
-                float = true;
+            if (!isFloat) {
+                isFloat = true;
                 enteredValue = enteredValue + '.';
                 bottomDisplay.textContent = enteredValue;
             }
+            
         } else if (button.getAttribute("data-type") == "delete") {
 
                 enteredValue = enteredValue.slice(0, -1);
                 bottomDisplay.textContent = enteredValue;
         }
+    })
+
+    button.addEventListener("hover", () => {
+
     })
 })
 
